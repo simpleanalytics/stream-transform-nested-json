@@ -1,6 +1,6 @@
 # Stream transformer for nested objects in JSON arrays
 
-![https://img.shields.io/badge/dependecies-none-brightgreen] ![https://img.shields.io/badge/license-MIT-brightgreen]
+![No dependencies](https://img.shields.io/badge/dependencies-none-brightgreen) ![License MIT](https://img.shields.io/badge/license-MIT-brightgreen)
 
 > A huge thanks to Say Media, Inc. for the [highland-find-json](https://github.com/saymedia/highland-find-json) package where we could copy most of the code and docs from. They wrote it for [Highland](https://github.com/caolan/highland), we ported it to native Node.js Streams. Their [license](/LICENSE) is MIT and this port as well.
 
