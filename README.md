@@ -1,6 +1,6 @@
 # Stream transformer for nested objects in JSON arrays
 
-> A huge thanks to Say Media, Inc. for the [highland-find-json](https://github.com/saymedia/highland-find-json) package where we could copy most of the code and docs from. They wrote it for [Highland](https://github.com/caolan/highland), we ported it to native Node.js Streams. Their license is MIT and so it ours.
+> A huge thanks to Say Media, Inc. for the [highland-find-json](https://github.com/saymedia/highland-find-json) package where we could copy most of the code and docs from. They wrote it for [Highland](https://github.com/caolan/highland), we ported it to native Node.js Streams. Their [license](/LICENSE) is MIT and this port as well.
 
 `stream-transform-nested-json` is a library for locating JSON objects in a stream of buffers.
 
