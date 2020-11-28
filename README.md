@@ -8,15 +8,15 @@
 
 The primary use-case for this library is for dealing with very large (or infinite) streams containing many relatively-small JSON objects, such as JSON-based logging.
 
-It expects as input a stream of buffers, such as would occur if receiving data from a TCP socket or streaming data from any database. It emits another stream of buffers, but in the output each buffer exactly frames a JSON object from the input stream.
+It expects as input a stream of buffers. It emits another stream of buffers, but in the output each buffer exactly frames a JSON object from the input stream.
 
-For example, imagine the following buffers show up in an HTTP response:
+For example, imagine the following buffers show up in a stream:
 
 - `[{"user":"`
 - `bert"},{"user`
 - `":null}]`
 
-`stream-transform-nested-json` would consume the above and produce a stream with two buffers as follows:
+`stream-transform-nested-json` would transform the above and produce a stream with two buffers as follows:
 
 - `{"user":"bert"}`
 - `{"user":null}`
