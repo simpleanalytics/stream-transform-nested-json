@@ -26,7 +26,7 @@ This library does not actually _parse_ the JSON; instead, it counts open and clo
 ## Usage
 
 ```js
-const { Transform } = require("stream");
+const { Transform, Readable } = require("stream");
 const Transformer = require("stream-transform-nested-json");
 
 const transform = new Transformer();
