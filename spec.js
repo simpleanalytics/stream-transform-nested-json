@@ -57,11 +57,33 @@ describe("TransformNestedJSON", () => {
   });
 
   describe("special characters", () => {
-    it("should allow backslashes", async () => {
+    it("should allow backslashes (JSON stringify test)", async () => {
+      const transform = new Transformer();
+      const readable = Readable.from(
+        Buffer.from(JSON.stringify([{ name: "\\" }, { name: "Bert" }]))
+      );
+      const onData = jest.fn();
+
+      await new Promise((res, rej) =>
+        readable
+          .pipe(transform)
+          .on("data", onData)
+          .on("error", rej)
+          .on("end", res)
+      );
+
+      expect(onData).toHaveBeenCalledTimes(2);
+      const [call1, call2] = onData.mock.calls;
+
+      expect(call1[0].toString()).toBe(JSON.stringify({ name: "\\" }));
+      expect(call2[0].toString()).toBe(JSON.stringify({ name: "Bert" }));
+    });
+
+    it("should allow backslashes (plain string)", async () => {
       const transform = new Transformer();
       const readable = Readable.from([
         Buffer.from('{"name":'),
-        Buffer.from('"\\"'),
+        Buffer.from('"\\\\"'),
         Buffer.from('},{"name":'),
         Buffer.from('"Bert"}'),
       ]);
