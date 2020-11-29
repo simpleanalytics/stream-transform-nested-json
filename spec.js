@@ -55,4 +55,31 @@ describe("TransformNestedJSON", () => {
       expect(call2[0].toString()).toBe(JSON.stringify({ name: "Bert" }));
     });
   });
+
+  describe("special characters", () => {
+    it("should allow backslashes", async () => {
+      const transform = new Transformer();
+      const readable = Readable.from([
+        Buffer.from('{"name":'),
+        Buffer.from('"\\"'),
+        Buffer.from('},{"name":'),
+        Buffer.from('"Bert"}'),
+      ]);
+      const onData = jest.fn();
+
+      await new Promise((res, rej) =>
+        readable
+          .pipe(transform)
+          .on("data", onData)
+          .on("error", rej)
+          .on("end", res)
+      );
+
+      expect(onData).toHaveBeenCalledTimes(2);
+      const [call1, call2] = onData.mock.calls;
+
+      expect(call1[0].toString()).toBe(JSON.stringify({ name: "\\" }));
+      expect(call2[0].toString()).toBe(JSON.stringify({ name: "Bert" }));
+    });
+  });
 });
