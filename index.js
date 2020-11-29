@@ -43,6 +43,11 @@ class TransformNestedJSON extends Transform {
 
     for (let pos = 0; pos < len; pos++) {
       const octet = chunk[pos];
+      
+      if (octet == HEX.backslash && this.escaping) {
+        this.escaping = false;
+        continue;
+      }
 
       if (octet == HEX.quote) {
         if (this.inString && !this.escaping) {
